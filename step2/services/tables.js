@@ -27,12 +27,12 @@ module.exports = async (app, opts) => {
 
   app.post('/', {
     schema: {
-      body: Object.assign(tablesSchema, {
+      body: Object.assign({}, tablesSchema, {
         description: 'Table information to save',
         summary: 'Table information'
       }),
       response: {
-        '200': Object.assign(tablesSchema, {
+        '200': Object.assign({}, tablesSchema, {
           description: 'Added table information',
           summary: 'Added table'
         })
@@ -47,7 +47,7 @@ module.exports = async (app, opts) => {
   app.get('/:id', {
     schema: {
       response: {
-        '200': Object.assign(tablesSchema, {
+        '200': Object.assign({}, tablesSchema, {
           description: 'Table information',
           summary: 'Table information'
         })
