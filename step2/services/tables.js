@@ -9,7 +9,9 @@ module.exports = async (app, opts) => {
   app.get('/', {
     schema: {
       response: {
-        '2xx': {
+        '200': {
+          description: 'Get list of all tables',
+          summary: 'Get all tables',
           type: 'array',
           items: tablesSchema
         }
@@ -25,9 +27,15 @@ module.exports = async (app, opts) => {
 
   app.post('/', {
     schema: {
-      body: tablesSchema,
+      body: Object.assign(tablesSchema, {
+        description: 'Table information to save',
+        summary: 'Table information'
+      }),
       response: {
-        '200': tablesSchema,
+        '200': Object.assign(tablesSchema, {
+          description: 'Added table information',
+          summary: 'Added table'
+        })
       }
     }
   }, async(req, reply) => {
@@ -39,7 +47,10 @@ module.exports = async (app, opts) => {
   app.get('/:id', {
     schema: {
       response: {
-        '2xx': tablesSchema
+        '200': Object.assign(tablesSchema, {
+          description: 'Table information',
+          summary: 'Table information'
+        })
       }
     }
   }, async(req, reply) => {
@@ -62,14 +73,22 @@ module.exports = async (app, opts) => {
       params: {
         type: 'object',
         properties: {
-          id: { type: 'string' }
+          id: {
+            description: 'The id to delete',
+            summary: 'The id to delete',
+            type: 'string'
+          }
         }
       },
       response: {
         '200': {
           type: 'object',
           properties: {
-            status: { type: 'string' }
+            status: {
+              description: 'Ok if all done',
+              summary: 'Ok if all done',
+              type: 'string'
+            }
           }
         }
       }
