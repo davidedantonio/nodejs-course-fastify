@@ -1,0 +1,32 @@
+{
+  "name": "step1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "mongo": "docker run -p 27017:27017 mongo:4.0.3",
+    "test": "tap test/*.test.js test/*/*.test.js test/*/*/*.test.js",
+    "start": "fastify start -l info app.js",
+    "dev": "fastify start -l info -P app.js"
+  },
+  "keywords": [
+    "nodejs",
+    "fastify"
+  ],
+  "author": "Davide D'Antonio <davide.dantonio@webeetle.com>",
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^1.11.0",
+    "fastify-autoload": "^0.5.0",
+    "fastify-cli": "^0.25.2",
+    "fastify-mongodb": "^0.9.1",
+    "fastify-plugin": "^1.2.0"
+  },
+  "devDependencies": {
+    "mongo-clean": "^2.0.0",
+    "tap": "^12.0.0"
+  }
+}
