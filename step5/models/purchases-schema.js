@@ -26,7 +26,7 @@ const purchasesSchema = {
     dishes: {
       type: 'array',
       items: [{
-        type: object,
+        type: 'object',
         properties: {
           name: {
             type: 'string'
