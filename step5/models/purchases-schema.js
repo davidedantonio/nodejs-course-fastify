@@ -7,6 +7,9 @@ const purchasesSchema = {
     table: {
       type: 'object',
       properties: {
+        _id: {
+          type: 'string'
+        },
         name: {
           type: 'string'
         },
@@ -25,9 +28,12 @@ const purchasesSchema = {
     },
     dishes: {
       type: 'array',
-      items: [{
+      items: {
         type: 'object',
         properties: {
+          _id: {
+            type: 'string'
+          },
           name: {
             type: 'string'
           },
@@ -38,7 +44,7 @@ const purchasesSchema = {
             type: 'number'
           }
         }
-      }]
+      }
     },
     orderedAt: {
       type: 'integer'

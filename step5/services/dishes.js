@@ -8,6 +8,7 @@ module.exports = async (app, opts) => {
 
   app.get('/', {
     schema: {
+      tags: ['Dishes'],
       response: {
         '200': {
           description: 'Get list of all dishes',
@@ -27,6 +28,7 @@ module.exports = async (app, opts) => {
 
   app.post('/', {
     schema: {
+      tags: ['Dishes'],
       body: Object.assign({}, dishSchema, {
         description: 'Dish information to save',
         summary: 'Dish information'
@@ -46,6 +48,7 @@ module.exports = async (app, opts) => {
 
   app.get('/:id', {
     schema: {
+      tags: ['Dishes'],
       response: {
         '200': Object.assign({}, dishSchema, {
           description: 'Dish information',
@@ -70,6 +73,7 @@ module.exports = async (app, opts) => {
 
   app.delete('/:id', {
     schema: {
+      tags: ['Dishes'],
       params: {
         type: 'object',
         properties: {

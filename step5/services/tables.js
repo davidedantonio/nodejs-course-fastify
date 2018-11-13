@@ -8,6 +8,7 @@ module.exports = async (app, opts) => {
 
   app.get('/', {
     schema: {
+      tags: ['Tables'],
       response: {
         '200': {
           description: 'Get list of all tables',
@@ -27,6 +28,7 @@ module.exports = async (app, opts) => {
 
   app.post('/', {
     schema: {
+      tags: ['Tables'],
       body: Object.assign({}, tablesSchema, {
         description: 'Table information to save',
         summary: 'Table information'
@@ -44,8 +46,73 @@ module.exports = async (app, opts) => {
     return obj
   })
 
+  app.put('/:id', {
+    schema: {
+      tags: ['Tables'],
+      params: {
+        type: 'object',
+        properties: {
+          id: {
+            description: 'The id to update',
+            summary: 'The id to update',
+            type: 'string'
+          }
+        }
+      },
+      body: {
+        type: 'object',
+        properties: {
+          busy: {
+            type: 'boolean'
+          },
+          covered: {
+            type: 'integer'
+          }
+        },
+        required: ['busy', 'covered']
+      },
+      response: {
+        '200': {
+          type: 'object',
+          properties: {
+            status: {
+              description: 'Ok if all done',
+              summary: 'Ok if all done',
+              type: 'string'
+            }
+          }
+        }
+      }
+    }
+  }, async(req, reply) => {
+    const id = req.params.id
+    const result = await tables.findOne({
+      _id: new ObjectId(id)
+    })
+
+    if (!result) {
+      return reply
+        .code(404)
+        .send({status: 'table not found'})
+    }
+
+    const data = await tables.updateOne(
+      { _id: new ObjectId(id) },
+      { $set: {
+          busy: req.body.busy,
+          covered: req.body.covered
+        }
+      }
+    )
+
+    if (data.result.ok)
+      return { "status": "ok" }
+    return { "status": "ko" }
+  })
+
   app.get('/:id', {
     schema: {
+      tags: ['Tables'],
       response: {
         '200': Object.assign({}, tablesSchema, {
           description: 'Table information',
@@ -70,6 +137,7 @@ module.exports = async (app, opts) => {
 
   app.delete('/:id', {
     schema: {
+      tags: ['Tables'],
       params: {
         type: 'object',
         properties: {

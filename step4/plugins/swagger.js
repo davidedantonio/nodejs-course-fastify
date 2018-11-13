@@ -16,6 +16,11 @@ module.exports = fp(async (fastify, opts) => {
         url: 'https://swagger.io',
         description: 'Find more info here'
       },
+      tags: [
+        { name: 'Purchases', description: 'Purchases' },
+        { name: 'Tables', description: 'Manage restaurant\'s tables' },
+        { name: 'Dishes', description: 'Manage restaurant\'s dish' }
+      ],
       host: `localhost:${process.env.PORT}`,
       schemes: ['http'],
       consumes: ['application/json'],
