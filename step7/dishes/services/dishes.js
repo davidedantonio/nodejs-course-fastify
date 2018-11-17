@@ -23,7 +23,7 @@ module.exports = async (app, opts) => {
       name: 1
     }).toArray()
 
-    req.log.error("Requested dishes list")
+    req.log.info("Requested dishes list")
     return result
   })
 
@@ -44,7 +44,7 @@ module.exports = async (app, opts) => {
   }, async(req, reply) => {
     const data = await dishes.insertOne(req.body)
     let obj = data.ops[0]
-    req.log.error("Added dish")
+    req.log.info("Added dish")
     return obj
   })
 
@@ -71,7 +71,7 @@ module.exports = async (app, opts) => {
         .send({status: 'dish not found'})
     }
 
-    req.log.error("Dish request")
+    req.log.info("Dish request")
     return result
   })
 

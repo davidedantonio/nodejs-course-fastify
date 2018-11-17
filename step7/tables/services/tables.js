@@ -22,7 +22,7 @@ module.exports = async (app, opts) => {
     const result = await tables.find().sort({
       name: 1
     }).toArray()
-
+    req.log.info("Requested tables list")
     return result
   })
 
@@ -43,6 +43,7 @@ module.exports = async (app, opts) => {
   }, async(req, reply) => {
     const data = await tables.insertOne(req.body)
     let obj = data.ops[0]
+    req.log.info("Added new table")
     return obj
   })
 
@@ -91,6 +92,7 @@ module.exports = async (app, opts) => {
     })
 
     if (!result) {
+      req.log.warn("Table not found")
       return reply
         .code(404)
         .send({status: 'table not found'})
@@ -127,11 +129,13 @@ module.exports = async (app, opts) => {
     })
 
     if (!result) {
+      req.log.warn("Table not found")
       return reply
         .code(404)
         .send({status: 'table not found'})
     }
 
+    req.log.info("Table found")
     return result
   })
 
@@ -168,11 +172,13 @@ module.exports = async (app, opts) => {
     })
 
     if (!result.deletedCount){
+      req.log.warn("Table not found")
       return reply
         .code(404)
         .send({status: 'table not found'})
     }
 
+    req.log.info("Table deleted")
     return {status: 'ok'}
   })
 }
