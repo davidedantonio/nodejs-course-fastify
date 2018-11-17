@@ -8,3 +8,4 @@ NodeJS course fastify
 - Step 5: Implement Dishes, Purchases Services
 - Step 6: Split in four services
 - Step 7: Add logger
+- Step 8: Kubernetes

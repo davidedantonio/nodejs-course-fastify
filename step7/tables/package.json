@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "tap test/*.test.js test/*/*.test.js test/*/*/*.test.js",
-    "start": "fastify start -l info app.js",
-    "dev": "fastify start -l info -P app.js"
+    "start": "fastify start -l info app.js | pino-elasticsearch",
+    "dev": "fastify start -l info app.js | pino-elasticsearch -H http://localhost --port=9200"
   },
   "keywords": [],
   "author": "",
