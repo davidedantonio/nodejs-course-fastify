@@ -4,7 +4,7 @@ const { test } = require('tap')
 const {
   build,
   testWithLogin
-} = require('../helper')
+} = require('../../../step6/test/helper')
 
 test('cannot create a table without a login', async (t) => {
   const app = build(t)
