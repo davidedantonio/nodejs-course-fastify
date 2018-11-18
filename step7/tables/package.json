@@ -9,7 +9,10 @@
   "scripts": {
     "test": "tap test/*.test.js test/*/*.test.js test/*/*/*.test.js",
     "start": "fastify start -l info app.js | pino-elasticsearch",
-    "dev": "fastify start -l info app.js | pino-elasticsearch -H http://localhost --port=9200"
+    "dev": "fastify start -l info app.js | pino-elasticsearch -H http://localhost --port=9200",
+    "doctor": "clinic doctor --on-port 'autocannon -c 100 -d 5 localhost:3002' -- fastify start app.js",
+    "flame": "clinic flame --on-port 'autocannon -c 100 -d 5 localhost:3002' -- fastify start app.js",
+    "bubbleprof": "clinic bubbleprof --on-port 'autocannon -c 100 -d 5 localhost:3002' -- fastify start app.js"
   },
   "keywords": [],
   "author": "",
@@ -20,8 +23,7 @@
     "fastify-cli": "^0.25.3",
     "fastify-mongodb": "^0.9.1",
     "fastify-plugin": "^1.2.0",
-    "fastify-swagger": "^0.15.2",
-    "pino-elasticsearch": "^3.0.1"
+    "fastify-swagger": "^0.15.2"
   },
   "devDependencies": {
     "tap": "^12.0.0"
