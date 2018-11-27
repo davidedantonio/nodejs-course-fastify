@@ -1,5 +1,5 @@
 {
-  "name": "tables",
+  "name": "auth",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -10,21 +10,20 @@
     "mongo": "docker run -p 27017:27017 mongo:4.0.3",
     "test": "tap test/*.test.js test/*/*.test.js test/*/*/*.test.js",
     "start": "fastify start -l info app.js | pino-elasticsearch",
-    "dev": "fastify start -l info app.js | pino-elasticsearch -H http://localhost --port=9200",
-    "doctor": "clinic doctor --on-port 'autocannon -c 100 -d 5 localhost:3002' -- fastify start app.js",
-    "flame": "clinic flame --on-port 'autocannon -c 100 -d 5 localhost:3002' -- fastify start app.js",
-    "bubbleprof": "clinic bubbleprof --on-port 'autocannon -c 100 -d 5 localhost:3002' -- fastify start app.js"
+    "dev": "fastify start -l info app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@beetle/fastify-auth-jwt-mongo": "^0.1.1",
     "fastify": "^1.11.0",
     "fastify-autoload": "^0.5.0",
     "fastify-cli": "^0.25.3",
+    "fastify-jwt": "^0.7.0",
     "fastify-mongodb": "^0.9.1",
     "fastify-plugin": "^1.2.0",
-    "fastify-swagger": "^0.15.2"
+    "pino-elasticsearch": "^3.0.1"
   },
   "devDependencies": {
     "tap": "^12.0.0"
