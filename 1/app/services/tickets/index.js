@@ -50,16 +50,6 @@ module.exports = async function(fastify, opts) {
     return obj
   })
 
-  fastify.put('/ticket', async function (request, reply) {
-    const data = await tickets.updateOne(
-      { _id: new ObjectId(request.body._id) },
-      { $set : {
-        title: request.body.title,
-        body: request.body.body,
-      }})
-    return { status: data.result.ok === 1 ? 'ok' : 'ko'}
-  })
-
 }
 
 module.exports.autoPrefix = '/api'
