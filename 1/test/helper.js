@@ -5,7 +5,7 @@
 
 const Fastify = require('fastify')
 const fp = require('fastify-plugin')
-const App = require('../app')
+const App = require('../app/app')
 
 const clean = require('mongo-clean')
 const { MongoClient } = require('mongodb')

@@ -1,25 +1,24 @@
 'use strict'
 
 const { test } = require('tap')
-const {
-  build,
-} = require('../helper')
+const { build } = require('../helper')
 
-test('create and get table', async (t) => {
+test('create and get ticket', async (t) => {
   const app = build(t)
   const res1 = await app.inject({
     method: 'POST',
-    url: '/tables',
+    url: '/api/ticket',
     body: {
-      name: 'A table'
+      title: 'Ticket title',
+      body: 'ticket body'
     }
   })
 
   t.equal(res1.statusCode, 200) // Created
   const body1 = JSON.parse(res1.body)
 
-  t.ok(body1.table._id)
-  const url = `/tables/${body1.table._id}`
+  t.ok(body1._id)
+  const url = `/api/ticket/${body1._id}`
   const res2 = await app.inject({
     method: 'GET',
     url: url
@@ -28,8 +27,9 @@ test('create and get table', async (t) => {
   t.equal(res2.statusCode, 200)
 
   t.deepEqual(JSON.parse(res2.body), {
-    _id: body1.table._id,
-    name: 'A table'
+    _id: body1._id,
+    title: 'Ticket title',
+    body: 'ticket body'
   })
 })
 
@@ -37,17 +37,19 @@ test('create and get all', async (t) => {
   const app = build(t)
   const res1 = await app.inject({
     method: 'POST',
-    url: '/tables',
+    url: '/api/ticket',
     body: {
-      name: 'A table'
+      title: 'Ticket title 1',
+      body: 'ticket body 1'
     }
   })
 
   const res2 = await app.inject({
     method: 'POST',
-    url: '/tables',
+    url: '/api/ticket',
     body: {
-      name: 'A beautiful table'
+      title: 'Ticket title 2',
+      body: 'ticket body 2'
     }
   })
 
@@ -56,18 +58,18 @@ test('create and get all', async (t) => {
 
   const resAll = await app.inject({
     method: 'GET',
-    url: '/tables'
+    url: '/api/tickets'
   })
 
   t.equal(resAll.statusCode, 200)
-
-    t.deepEqual(JSON.parse(resAll.body), {
-    tables: [{
-      _id: body1.table._id,
-      name: 'A table'
+    t.deepEqual(JSON.parse(resAll.body), [{
+      _id: body2._id,
+      title: 'Ticket title 2',
+      body: 'ticket body 2'
     },{
-      _id: body2.table._id,
-      name: 'A beautiful table'
+      _id: body1._id,
+      title: 'Ticket title 1',
+      body: 'ticket body 1'
     }]
-  })
+  )
 })
