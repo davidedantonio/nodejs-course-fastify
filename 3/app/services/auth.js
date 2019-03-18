@@ -164,7 +164,7 @@ module.exports = async (app, opts) => {
       return
     }
 
-    const res = await pwd.verify(Buffer.from(password), user.hashedPassword.buffer)
+    const res = await pwd.verify(Buffer.from(password), user.password.buffer)
     switch (res) {
       case securePassword.INVALID_UNRECOGNIZED_HASH:
         reply
