@@ -8,15 +8,15 @@ module.exports = fp(async (fastify, opts) => {
     routePrefix: '/documentation',
     swagger: {
       info: {
-        title: 'Tables API',
-        description: 'Tables api definition',
+        title: 'Tickets API',
+        description: 'Tickets api definition',
         version: process.env.npm_package_version
       },
       externalDocs: {
         url: 'https://swagger.io',
         description: 'Find more info here'
       },
-      host: `localhost:${process.env.PORT}`,
+      host: `localhost:${process.env.PORT || 3000}`,
       schemes: ['http'],
       consumes: ['application/json'],
       produces: ['application/json']

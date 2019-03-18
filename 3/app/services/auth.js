@@ -1,7 +1,6 @@
 'use strict'
 
 const securePassword = require('secure-password')
-const usersSchema = require('../models/users-schema')
 
 module.exports = async (app, opts) => {
   const users = app.mongo.db.collection('users')
@@ -13,7 +12,24 @@ module.exports = async (app, opts) => {
 
   app.post('/signup', {
     schema: {
-      body: usersSchema,
+      body: {
+        type: 'object',
+        properties: {
+          _id: {
+            type: 'string'
+          },
+          fullName: {
+            type: 'string'
+          },
+          username: {
+            type: 'string'
+          },
+          password: {
+            type: 'string'
+          }
+        },
+        required: ['fullName', 'username', 'password']
+      },
       response:{
         '200': {
           type: 'object',
