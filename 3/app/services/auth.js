@@ -78,10 +78,10 @@ module.exports = async (app, opts) => {
     const hashedPassword = await pwd.hash(Buffer.from(password))
 
     try {
-      const data = await users.insertOne({
+      await users.insertOne({
         "fullName": fullName,
         "username": username,
-        "password": password
+        "password": hashedPassword
       })
     } catch (err) {
       // duplicate key
