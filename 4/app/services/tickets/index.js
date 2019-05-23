@@ -157,9 +157,10 @@ module.exports = async function(fastify, opts) {
       }
     }
   }, async function (request, reply) {
-    const result = await tickets.find().sort({
-      title: -1,
+    const result = await tickets.find({
       user: request.user.username
+    }).sort({
+      title: -1
     }).toArray()
 
     return result
