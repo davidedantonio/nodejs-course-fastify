@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fastify": "^1.11.0",
+    "fastify": "^3.1.1",
     "fastify-autoload": "^0.5.0",
     "fastify-cli": "^0.25.3",
     "fastify-mongodb": "^0.9.1",
